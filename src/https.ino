@@ -1,27 +1,57 @@
-
-/*
- *  HTTP over TLS (HTTPS) example sketch
- *
- *  This example demonstrates how to use
- *  WiFiClientSecure class to access HTTPS API.
- *  We fetch and display the status of
- *  esp8266/Arduino project continuous integration
- *  build.
- *
- *  Created by Ivan Grokhotkov, 2015.
- *  This example is in public domain.
- */
-
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
 
 
-const int httpsPort = 443;
+bool is_card_allowed(char* tag){
+  WiFiClient client;
+  if (!client.connect(METAESPACIO_HOST, METAESPACIO_PORT)) {
+    DEBUGPRINT("connection failed\n");
+    return false;
+  }
+  
+  // This will send the request to the server
+  /*
+  client.println(
+    String("GET ") + url + " HTTP/1.1\r\n" +
+    "Host: " + host + "\r\n" + "Authorization: Basic " + userpass + "\r\n" + 
+    "Connection: close\r\n\r\n");
+  */
 
+  client.println(
+    String("GET ") + METAESPACIO_API_URL + tag + " HTTP/1.1\r\n" +
+    "Host: " + METAESPACIO_HOST + "\r\n" + 
+    "Connection: close\r\n\r\n");
 
-bool is_card_allowed(){
-  // TODO
-  return true;
+  delay(10);
+  
+  while(client.connected()){
+    String line = client.readStringUntil('\r');
+    //Serial.println(line);
+    String result = line.substring(1,2);
+    
+    if (result=="[") //detects the beginning of the string json
+    {
+      Serial.print("Response: ");
+      Serial.println(line);
+
+      if (line.indexOf("true") >= 0 )
+      {
+        Serial.println("Access Granted");
+        Serial.println("Relay Activated");
+        delay(1500);
+        return true;
+       }
+       else if (line.indexOf("null") >= 0 )
+       {
+        Serial.println("Access Unidentified");
+       }
+       else{
+          Serial.println("False");
+        }
+    }
+    
+  }
+  return false;
 }
 
 void wifiSetup() {
@@ -42,6 +72,21 @@ void wifiSetup() {
 
 
 void https_ejemplo() {
+  /*
+ *  HTTP over TLS (HTTPS) example sketch
+ *
+ *  This example demonstrates how to use
+ *  WiFiClientSecure class to access HTTPS API.
+ *  We fetch and display the status of
+ *  esp8266/Arduino project continuous integration
+ *  build.
+ *
+ *  Created by Ivan Grokhotkov, 2015.
+ *  This example is in public domain.
+ */
+
+  const int httpsPort = 443;
+
   // Use WiFiClientSecure class to create TLS connection
   WiFiClientSecure client;
   Serial.print("connecting to ");
@@ -60,6 +105,8 @@ void https_ejemplo() {
   String url = "FF:FF:FF:FF:FF:FF";
   Serial.print("requesting URL: ");
   Serial.println(url);
+
+  url = "";
 
   client.print(String("GET ") + METAESPACIO_API_URL + url + " HTTP/1.1\r\n" +
                "Host: " + METAESPACIO_HOST + "\r\n" +

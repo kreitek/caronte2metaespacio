@@ -1,14 +1,15 @@
 // Renombrar como userconfig y rellenar (no se añadirá a git)
 
 const char* WIFI_SSID = "nombredelawifi";
-const char* WIFI_PASWORD = "contraseñadelawifi-ip";
+const char* WIFI_PASWORD = "contraseñadelawifi";
 
 const char* METAESPACIO_HOST = "https://metaespacio.kreitek.org";
+const unsigned int METAESPACIO_PORT = 80;
 const char* METAESPACIO_API_URL = "/caronte";
 
-const char* SONOFF_IP = "192.168.1.78";
-const char* SONOFF_USER = "admin";
-const char* SONOFF_PASSWORD = "xxxxxxxx";
+const char* SONOFF_IP = "192.168.1.32";
+const unsigned int SONOFF_PORT = 80;
+const char* SONOFF_KEY = "C8BD9B5F98D46232";
 
 
 #define MQTT_BROKER "192.168.1.10" // ip o host del broker mqtt (mosquito)
