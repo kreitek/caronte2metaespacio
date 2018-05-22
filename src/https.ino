@@ -26,42 +26,31 @@ bool is_card_allowed(char* tag){
   
   while(client.connected()){
     String line = client.readStringUntil('\r');
-    //Serial.println(line);
-    String result = line.substring(1,2);
-    
-    if (result=="[") //detects the beginning of the string json
-    {
-      Serial.print("Response: ");
-      Serial.println(line);
-
-      if (line.indexOf("true") >= 0 )
-      {
-        Serial.println("Access Granted");
-        Serial.println("Relay Activated");
-        delay(1500);
+    line.trim();
+    DEBUGPRINT("%s\n", line.c_str());
+    if (strstr ( line.c_str(), "HTTP/1.0" ) != NULL) {
+      if (strstr ( line.c_str(), "200 OK" ) != NULL) 
         return true;
-       }
-       else if (line.indexOf("null") >= 0 )
-       {
-        Serial.println("Access Unidentified");
-       }
-       else{
-          Serial.println("False");
-        }
+      else
+        return false;
     }
+
     
   }
+  client.stop();
   return false;
 }
 
 void wifiSetup() {
   Serial.println();
   Serial.print("connecting to ");
-  Serial.println(WIFI_SSID);
+  Serial.println(config.wifi_ssd);
   WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASWORD);
+  WiFi.begin(config.wifi_ssd, config.wifi_password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
+    if (comprobar_modoconfig())
+      return;
     Serial.print(".");
   }
   Serial.println();

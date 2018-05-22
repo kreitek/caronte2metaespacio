@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESP</title>
+    <style>
+        form {
+            margin: 0 auto;
+            width: 300px;
+            padding: 1em;
+            border: 1px solid #CCC;
+            border-radius: 1em;
+        }
+
+        div+div {
+            margin-top: 1em;
+        }
+
+        label {
+            display: block;
+            width: 300px;
+            text-align: left;
+        }
+
+        input,
+        textarea {
+            font: 1em sans-serif;
+            width: 300px;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 1px solid #999;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #000;
+        }
+
+        textarea {
+            vertical-align: top;
+            height: 5em;
+            resize: vertical;
+        }
+
+        .button {}
+
+        button {
+            margin-left: .5em;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post">
+        <div>
+            <label for="wifi_ssd">Wifi SSD:</label>
+            <input type="text" id="wifi_ssd" name="wifi_ssd" value="lalala">
+        </div>
+        <div>
+            <label for="wifi_password">wifi Password:</label>
+            <input type="text" id="wifi_password" name="wifi_password" value="">
+        </div>
+        <div>
+            <label for="metaespacio_host">Metaespacio host:</label>
+            <input type="text" id="metaespacio_host" name="metaespacio_host" value="lalala">
+        </div>
+        <div>
+            <label for="metaespacio_port">Metaespacio Port:</label>
+            <input type="text" id="metaespacio_port" name="metaespacio_port" value="lalala">
+        </div>
+        <div>
+            <label for="metaespacio_api_url">Metaespacio API url:</label>
+            <input type="text" id="metaespacio_api_url" name="metaespacio_api_url" value="lalala">
+        </div>
+        <div class="button">
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</body>
+
+</html>

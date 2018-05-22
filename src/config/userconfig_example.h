@@ -1,11 +1,6 @@
 // Renombrar como userconfig y rellenar (no se añadirá a git)
 
-const char* WIFI_SSID = "nombredelawifi";
-const char* WIFI_PASWORD = "contraseñadelawifi";
-
-const char* METAESPACIO_HOST = "https://metaespacio.kreitek.org";
-const unsigned int METAESPACIO_PORT = 80;
-const char* METAESPACIO_API_URL = "/caronte";
+// NOTA: Se esta pasando esta configuracion al servidor web
 
 const char* SONOFF_IP = "192.168.1.32";
 const unsigned int SONOFF_PORT = 80;

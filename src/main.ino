@@ -3,44 +3,72 @@
 #include "config/all.h"
 
 
+int _tag[4];
 boolean lasttagaccepted;
 unsigned long lasttime;
 
-int _tag[4];
-
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
+bool _modo_config = false;
 
-void dump_byte_array(byte *buffer, byte bufferSize) {
-  for (byte i = 0; i < bufferSize; i++) {
-    // Serial.print(buffer[i] < 0x10 ? "" : ".");
-    // Serial.print(buffer[i], DEC);
-    _tag[i] = buffer[i];
-  }
-}
-
-void playbuzzer(){
-  analogWrite(BUZZER, 180);
-  delay(750);
-  analogWrite(BUZZER, 0);
-}
 
 void setup() {
-  // IO configuration
-  pinMode(BUZZER, OUTPUT);
-  pinMode(BUZZER_GND, OUTPUT);
-  analogWrite(BUZZER, 0);
-  digitalWrite(BUZZER_GND, LOW);
+  hardwareSetup();
   // Initialize serial communications
   Serial.begin(115200);
   delay(10);
   SPI.begin();           // Init SPI bus
   mfrc522.PCD_Init();    // Init MFRC522
+  eeprom_leer_configuracion();
 
-  wifiSetup();
+  if (!comprobar_modoconfig())
+    wifiSetup();
+
 }
 
+
 void loop() {
-  // Look for new cards
+
+/*
+  strcpy( config.wifi_ssd, "uno");
+  strcpy( config.wifi_password, "dos"); 
+  strcpy( config.metaespacio_host, "tres");
+  strcpy( config.metaespacio_api_url, "cuatro");
+  config.metaespacio_port = 80;
+  eeprom_guardar_configuracion();
+  Serial.println(config.wifi_ssd);
+  Serial.println(config.wifi_password);
+  Serial.println(config.metaespacio_host);
+  Serial.println(config.metaespacio_api_url);
+  Serial.println(config.metaespacio_port);
+  while(true){
+    yield();
+  }
+*/
+
+  if(!_modo_config){
+    normalLoop();
+    comprobar_modoconfig();
+  }
+  else {
+    webServerLoop();
+  }
+
+}
+
+bool comprobar_modoconfig(){
+  for (int i=0; i<5 ; i++){
+    if(digitalRead(PULSADOR_INT) != PULSADOR_INT_PULSADO)
+      return false;
+    delay(15);
+  }
+  // Configurar modo config
+  _modo_config = true;
+  webServerSetup();
+  return true;
+}
+
+void normalLoop(){
+    // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent()) {
     delay(50);
     return;
@@ -71,4 +99,12 @@ void loop() {
 
   // Avoid two cards in a short period
   delay(3000);
+}
+
+void dump_byte_array(byte *buffer, byte bufferSize) {
+  for (byte i = 0; i < bufferSize; i++) {
+    // Serial.print(buffer[i] < 0x10 ? "" : ".");
+    // Serial.print(buffer[i], DEC);
+    _tag[i] = buffer[i];
+  }
 }
