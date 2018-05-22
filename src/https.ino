@@ -4,7 +4,7 @@
 
 bool is_card_allowed(char* tag){
   WiFiClient client;
-  if (!client.connect(METAESPACIO_HOST, METAESPACIO_PORT)) {
+  if (!client.connect(config.metaespacio_host, config.metaespacio_port)) {
     DEBUGPRINT("connection failed\n");
     return false;
   }
@@ -18,8 +18,8 @@ bool is_card_allowed(char* tag){
   */
 
   client.println(
-    String("GET ") + METAESPACIO_API_URL + tag + " HTTP/1.1\r\n" +
-    "Host: " + METAESPACIO_HOST + "\r\n" + 
+    String("GET ") + config.metaespacio_api_url + tag + " HTTP/1.1\r\n" +
+    "Host: " + config.metaespacio_host + "\r\n" + 
     "Connection: close\r\n\r\n");
 
   delay(10);
@@ -79,13 +79,13 @@ void https_ejemplo() {
   // Use WiFiClientSecure class to create TLS connection
   WiFiClientSecure client;
   Serial.print("connecting to ");
-  Serial.println(METAESPACIO_HOST);
-  if (!client.connect(METAESPACIO_HOST, httpsPort)) {
+  Serial.println(config.metaespacio_host);
+  if (!client.connect(config.metaespacio_host, httpsPort)) {
     Serial.println("connection failed");
     return;
   }
 
-  if (client.verify(SHA1_FINGERPRINT, METAESPACIO_HOST)) {
+  if (client.verify(SHA1_FINGERPRINT, config.metaespacio_host)) {
     Serial.println("certificate matches");
   } else {
     Serial.println("certificate doesn't match");
@@ -97,8 +97,8 @@ void https_ejemplo() {
 
   url = "";
 
-  client.print(String("GET ") + METAESPACIO_API_URL + url + " HTTP/1.1\r\n" +
-               "Host: " + METAESPACIO_HOST + "\r\n" +
+  client.print(String("GET ") + config.metaespacio_api_url + url + " HTTP/1.1\r\n" +
+               "Host: " + config.metaespacio_host + "\r\n" +
                "User-Agent: ESP8266\r\n" +
                "Connection: close\r\n\r\n");
 

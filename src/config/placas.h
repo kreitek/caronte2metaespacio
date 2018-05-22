@@ -36,7 +36,7 @@
   #define BUZZER    5 // D1
   #define BUZZER_GND  4 // D2, just to ground all the time
 
-  #define PULSADOR_INT  2 // D4 // CUIDADO no todos los pines de weemos tienen pullups
-  #define PULSADOR_INT_MODO INPUT // ya tiene PULLUP (es el led)
-  #define PULSADOR_INT_PULSADO  LOW
+  #define PULSADOR_CONFIG  2 // D4 // CUIDADO no todos los pines de weemos tienen pullups
+  #define PULSADOR_CONFIG_MODO INPUT // ya tiene PULLUP (es el led)
+  #define PULSADOR_CONFIG_PULSADO  LOW
 #endif

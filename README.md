@@ -1,12 +1,10 @@
-WORK IN PROGRESS!
-
 **Índice**   
 
 - [DESCRIPCION](#descripcion)
 - [INSTRUCCIONES](#instrucciones)
-  - [OBTENER SHA1 FINGERPRINT](#obtener-sha1-fingerprint)
 - [COMPILAR Y FLASHEAR](#compilar-y-flashear)
   - [FLASHEAR POR OTA](#flashear-por-ota)
+- [CONFIGURACION](#configuracion)
 - [CHANGELOG](#changelog)
 - [RECONOCIMIENTOS](#reconocimientos)
 
@@ -17,13 +15,9 @@ Parte del sistema domotico del [Hangar2 Kreitek](http://kreitek.org) para permit
 # INSTRUCCIONES
 
 - Clonar el repositorio
-- En `src/config/` renombrar `userconfig_example.h` a `userconfig.h` y poner credenciales
 - La placa por defecto es WEMOS D1 mini, para una placa diferente, cambiar en `platformio.ini`
 - [Flashear la placa](#compilar-y-flashear)
-
-## OBTENER SHA1 FINGERPRINT
-
-- TODO
+- [Configurar](#configuracion)
 
 # COMPILAR Y FLASHEAR
 
@@ -31,7 +25,16 @@ Parte del sistema domotico del [Hangar2 Kreitek](http://kreitek.org) para permit
 
 ## FLASHEAR POR OTA
 
-- TODO
+- Una vez flasheado, se puede actualizar por OTA:
+- Pulsar boton configuracion (pin PULSADOR_CONFIG a gnd), conectarse a la wifi del ESP, desde un terminal ejecutar
+```pio run -t upload -e wemos-ota```
+
+# CONFIGURACION
+
+- Pulsar boton configuracion (pin PULSADOR_CONFIG a gnd)
+- El ESP se pone en modo AP, conectarse a la wifi del ESP (no tiene contraseña)
+- En un navegador entrar en la direccion 192.168.1.4
+- Poner datos y guardar
 
 # CHANGELOG
 

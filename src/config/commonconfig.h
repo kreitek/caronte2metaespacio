@@ -1,4 +1,8 @@
-#define OTA_TIMEOUT 10 * 60 * 1000 // tiempo que mantiene el modo ota (luego reinicia)
+#ifndef COMMONCONFIG_H
+#define COMMONCONFIG_H
+
+  #define OTA_TIMEOUT 15 * 60 * 1000 // tiempo que mantiene el modo ota (luego reinicia)
+  #define SHA1_FINGERPRINT "CF 05 98 89 CA FF 8E D8 5E 5C E0 C2 E4 F7 E6 C3 C7 50 DD 5C"
 
   struct config_t {
     char  wifi_ssd[50];
@@ -6,4 +10,11 @@
     char  metaespacio_host[50];
     int   metaespacio_port;
     char  metaespacio_api_url[50];
-  } config; 
+    char  sonoff_ip[16];
+    int   sonoff_port;
+    char  sonoff_key[50];
+  }; 
+
+  extern config_t config;  
+
+#endif

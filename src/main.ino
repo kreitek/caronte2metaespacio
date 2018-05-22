@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include "MFRC522.h"
 #include "config/all.h"
+#include "web_server.h"
+#include "eeprom_func.h"
 
 
 int _tag[4];
@@ -51,19 +53,22 @@ void loop() {
   }
   else {
     webServerLoop();
+    otaLoop();
+    otaAndServerTimeout();
   }
 
 }
 
 bool comprobar_modoconfig(){
   for (int i=0; i<5 ; i++){
-    if(digitalRead(PULSADOR_INT) != PULSADOR_INT_PULSADO)
+    if(digitalRead(PULSADOR_CONFIG) != PULSADOR_CONFIG_PULSADO)
       return false;
     delay(15);
   }
   // Configurar modo config
   _modo_config = true;
   webServerSetup();
+  otaSetup();
   return true;
 }
 

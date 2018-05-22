@@ -1,5 +1,5 @@
-#include <EEPROM.h>
-#include <Arduino.h>
+#include "eeprom_func.h"
+#include "config/all.h"
 
 
 void storeStruct(void *data_source, size_t size)

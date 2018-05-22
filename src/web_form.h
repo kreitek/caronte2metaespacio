@@ -20,7 +20,16 @@ char web_form_metaespacio_port[] = "<div><label for=\"metaespacio_port\">Metaesp
 char web_form_metaespacio_api_url[] = "<div><label for=\"metaespacio_api_url\">Metaespacio API url:</label>\
 <input type=\"text\" id=\"metaespacio_api_url\" name=\"metaespacio_api_url\"  value=\"";
 
-char web_form_fin[] = "<div class=\"button\"><button type=\"submit\">Guardar</button></div></form>\r\n";
+char web_form_sonoff_ip[] = "<div><label for=\"sonoff_ip\">Sonoff IP:</label>\
+<input type=\"text\" id=\"sonoff_ip\" name=\"sonoff_ip\"  value=\"";
+
+char web_form_sonoff_port[] = "<div><label for=\"sonoff_port\">Sonoff Port:</label>\
+<input type=\"text\" id=\"sonoff_port\" name=\"sonoff_port\"  value=\"";
+
+char web_form_sonoff_key[] = "<div><label for=\"sonoff_key\">Sonoff Key:</label>\
+<input type=\"text\" id=\"sonoff_key\" name=\"sonoff_key\"  value=\"";
+
+char web_form_fin[] = "<div class=\"button\"><button type=\"submit\">Guardar y reiniciar</button></div></form>\r\n";
 
 char web_enviado[] = "<H2>Informacion guardada. Reiniciando...</H2>\r\n";
 

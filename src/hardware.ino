@@ -1,5 +1,5 @@
 void hardwareSetup(){
-    pinMode(PULSADOR_INT, PULSADOR_INT_MODO);
+    pinMode(PULSADOR_CONFIG, PULSADOR_CONFIG_MODO);
 
     pinMode(BUZZER, OUTPUT);
     pinMode(BUZZER_GND, OUTPUT);

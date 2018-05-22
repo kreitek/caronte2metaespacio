@@ -1,0 +1,1 @@
+char bufferprint[500]; // Para imprimir
