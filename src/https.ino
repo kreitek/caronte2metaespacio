@@ -9,17 +9,10 @@ bool is_card_allowed(char* tag){
     return false;
   }
   
-  // This will send the request to the server
-  /*
   client.println(
-    String("GET ") + url + " HTTP/1.1\r\n" +
-    "Host: " + host + "\r\n" + "Authorization: Basic " + userpass + "\r\n" + 
-    "Connection: close\r\n\r\n");
-  */
-
-  client.println(
-    String("GET ") + config.metaespacio_api_url + tag + " HTTP/1.1\r\n" +
-    "Host: " + config.metaespacio_host + "\r\n" + 
+    String("GET ") + "/api/1/" + tag + " HTTP/1.1\r\n" +
+    "Host: " + config.metaespacio_host + "\r\n" +
+    "Authorization: Basic " + config.metaespacio_credentials + "\r\n" + 
     "Connection: close\r\n\r\n");
 
   delay(10);
@@ -42,20 +35,54 @@ bool is_card_allowed(char* tag){
 }
 
 void wifiSetup() {
+  /*
   Serial.println();
   Serial.print("connecting to ");
-  Serial.println(config.wifi_ssd);
+  Serial.println(config.wifi_ssid);
   WiFi.mode(WIFI_STA);
-  WiFi.begin(config.wifi_ssd, config.wifi_password);
+  char temp_wifi_ssid[50];
+  char temp_wifi_password[50];
+  sprintf(temp_wifi_ssid, config.wifi_ssid);
+  sprintf(temp_wifi_password, config.wifi_password);
+  Serial.print("connecting to ");
+  Serial.println(temp_wifi_ssid);
+  Serial.print("pass ");
+  Serial.println(temp_wifi_password);
+  WiFi.begin(temp_wifi_ssid, temp_wifi_password);
+  int contador=0;
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     if (comprobar_modoconfig())
       return;
     Serial.print(".");
+    contador++;
+    if (contador>150)
+      ESP.restart();
   }
   Serial.println();
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  */
+
+  //WiFi.begin("Ctllo", "zqxi3612");
+  Serial.print("connecting to ");
+  Serial.print(config.wifi_ssid);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(config.wifi_ssid,  config.wifi_password);
+  // Wait for connection
+  int contador=0;
+  while (WiFi.status() != WL_CONNECTED) { 
+    delay(500);
+    if (comprobar_modoconfig())
+      return;
+    Serial.print(".");
+    contador++;
+    if (contador>100)
+      ESP.restart();
+  }
+  Serial.println("conected!");
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 }
 
@@ -97,7 +124,7 @@ void https_ejemplo() {
 
   url = "";
 
-  client.print(String("GET ") + config.metaespacio_api_url + url + " HTTP/1.1\r\n" +
+  client.print(String("GET ") + config.metaespacio_credentials + url + " HTTP/1.1\r\n" +
                "Host: " + config.metaespacio_host + "\r\n" +
                "User-Agent: ESP8266\r\n" +
                "Connection: close\r\n\r\n");

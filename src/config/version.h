@@ -1,9 +1,11 @@
 #define APP_NAME                "CARONTE2METAESPACIO"
-#define APP_VERSION             "0.10.1"
+#define APP_VERSION             "0.10.2"
 #define APP_WEBSITE             "kreitek.org"
 
 /*
 Changelog
+- v0.10.2
+Corregido bug metia fin de linea en usuario wifi y contraseña
 - v0.10.1
 Refactorizado. Formulario web para configurar todo. Modo ota.
 - v0.9.3b

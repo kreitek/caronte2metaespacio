@@ -51,10 +51,10 @@
 </head>
 
 <body>
-    <form method="post">
+    <form method="post" action="action.php" accept-charset="utf-8">
         <div>
-            <label for="wifi_ssd">Wifi SSD:</label>
-            <input type="text" id="wifi_ssd" name="wifi_ssd" value="lalala">
+            <label for="wifi_ssid">Wifi SSD:</label>
+            <input type="text" id="wifi_ssid" name="wifi_ssid" value="Ctllo">
         </div>
         <div>
             <label for="wifi_password">wifi Password:</label>
@@ -62,18 +62,30 @@
         </div>
         <div>
             <label for="metaespacio_host">Metaespacio host:</label>
-            <input type="text" id="metaespacio_host" name="metaespacio_host" value="lalala">
+            <input type="text" id="metaespacio_host" name="metaespacio_host" value="192.168.1.30">
         </div>
         <div>
             <label for="metaespacio_port">Metaespacio Port:</label>
-            <input type="text" id="metaespacio_port" name="metaespacio_port" value="lalala">
+            <input type="text" id="metaespacio_port" name="metaespacio_port" value="5000">
         </div>
         <div>
-            <label for="metaespacio_api_url">Metaespacio API url:</label>
-            <input type="text" id="metaespacio_api_url" name="metaespacio_api_url" value="lalala">
+            <label for="metaespacio_credentials">Metaespacio API url:</label>
+            <input type="text" id="metaespacio_credentials" name="metaespacio_credentials" value="Y2Fyb250ZTpuYXZlbWFrZXI%3D">
+        </div>
+        <div>
+            <label for="sonoff_ip">Sonoff IP:</label>
+            <input type="text" id="sonoff_ip" name="sonoff_ip" value="192.168.1.32%2F">
+        </div>
+        <div>
+            <label for="sonoff_port">Sonoff Port:</label>
+            <input type="text" id="sonoff_port" name="sonoff_port" value="80">
+        </div>
+        <div>
+            <label for="sonoff_key">Sonoff Key:</label>
+            <input type="text" id="sonoff_key" name="sonoff_key" value="C8BD9B5F98D46232">
         </div>
         <div class="button">
-            <button type="submit">Guardar</button>
+            <button type="submit">Guardar y reiniciar</button>
         </div>
     </form>
 </body>

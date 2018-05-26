@@ -2,6 +2,7 @@
 
 - [DESCRIPCION](#descripcion)
 - [INSTRUCCIONES](#instrucciones)
+- [CONEXIONES](#conexiones)
 - [COMPILAR Y FLASHEAR](#compilar-y-flashear)
   - [FLASHEAR POR OTA](#flashear-por-ota)
 - [CONFIGURACION](#configuracion)
@@ -18,6 +19,10 @@ Parte del sistema domotico del [Hangar2 Kreitek](http://kreitek.org) para permit
 - La placa por defecto es WEMOS D1 mini, para una placa diferente, cambiar en `platformio.ini`
 - [Flashear la placa](#compilar-y-flashear)
 - [Configurar](#configuracion)
+
+# CONEXIONES
+
+- [conexiones](src/config/placas.h)
 
 # COMPILAR Y FLASHEAR
 

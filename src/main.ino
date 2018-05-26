@@ -17,36 +17,20 @@ void setup() {
   hardwareSetup();
   // Initialize serial communications
   Serial.begin(115200);
+  Serial.println();
   delay(10);
   SPI.begin();           // Init SPI bus
   mfrc522.PCD_Init();    // Init MFRC522
+
   eeprom_leer_configuracion();
 
   if (!comprobar_modoconfig())
     wifiSetup();
-
+    
 }
 
 
 void loop() {
-
-/*
-  strcpy( config.wifi_ssd, "uno");
-  strcpy( config.wifi_password, "dos"); 
-  strcpy( config.metaespacio_host, "tres");
-  strcpy( config.metaespacio_api_url, "cuatro");
-  config.metaespacio_port = 80;
-  eeprom_guardar_configuracion();
-  Serial.println(config.wifi_ssd);
-  Serial.println(config.wifi_password);
-  Serial.println(config.metaespacio_host);
-  Serial.println(config.metaespacio_api_url);
-  Serial.println(config.metaespacio_port);
-  while(true){
-    yield();
-  }
-*/
-
   if(!_modo_config){
     normalLoop();
     comprobar_modoconfig();
@@ -56,7 +40,6 @@ void loop() {
     otaLoop();
     otaAndServerTimeout();
   }
-
 }
 
 bool comprobar_modoconfig(){
@@ -72,8 +55,8 @@ bool comprobar_modoconfig(){
   return true;
 }
 
-void normalLoop(){
-    // Look for new cards
+void normalLoop(){ 
+  // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent()) {
     delay(50);
     return;
@@ -89,8 +72,9 @@ void normalLoop(){
   // Formateamos la respuesta
   dump_byte_array(mfrc522.uid.uidByte, mfrc522.uid.size);
 
-  char tag_str[9];  // almacena los 4 bytes del tag en formato hex seguidos.
-  sprintf(tag_str, "%02hX%02hX%02hX%02hX", _tag[0], _tag[1], _tag[2], _tag[3]); // Ej: C6E30F1B
+  char tag_str[12];  // almacena los 4 bytes del tag en formato hex separado por punto.
+  sprintf(tag_str, "%02hX.%02hX.%02hX.%02hX", _tag[0], _tag[1], _tag[2], _tag[3]); // Ej: C6E30F1B
+
   DEBUGPRINT("Tarjeta: %s\n", tag_str);
 
   if(is_card_allowed(tag_str)){
